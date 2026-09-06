@@ -1,22 +1,32 @@
 [project]
-name = "finance-kg"
+name = "aetheria-finance-kg"
 version = "0.1.0"
-description = "Financial Reasoning Knowledge Graph - offline-first finance entity/relation extraction and reasoning"
+description = "Financial Reasoning Knowledge Graph — extract, reason, and analyze financial relationships"
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.10"
-dependencies = [
-    "pydantic>=2.0",
-    "networkx>=3.0",
-    "click>=8.0",
-    "fastapi>=0.100",
-    "uvicorn>=0.23",
+authors = [
+    { name = "Aetheria", email = "team@aetheria.dev" }
 ]
+keywords = ["finance", "knowledge-graph", "nlp", "sec-filings", "reasoning"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial",
+]
+
+dependencies = []
 
 [project.optional-dependencies]
 dev = [
     "pytest>=7.0",
     "pytest-cov>=4.0",
+    "ruff>=0.4.0",
 ]
 
 [project.scripts]
@@ -26,5 +36,17 @@ finance-kg = "finance_kg.cli:main"
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+[tool.hatch.build.targets.wheel]
+packages = ["src/finance_kg"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "A", "SIM"]
